@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>Zay Shop eCommerce HTML CSS Template</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="apple-touch-icon" href="{% static 'img/apple-icon.png' %}">
+   <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   <link rel="stylesheet" href="{% static 'css/templatemo.css' %}">
+   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+   <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+   <link rel="stylesheet" href="{% static 'css/fontawesome.min.css' %}">
+   <!-- MDB -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css" rel="stylesheet" />
+
+   
+   {% block css %}
+      
+   {% endblock css %}
+   <style>
+      /* MESSAGES START */
+      .tost {
+         position: fixed;
+         top: 20px;
+         right: 20px;
+         z-index: 2050 !important;
+         animation: timeend 5.8s both;
+         opacity: 1;
+         
+      }
+
+      .time-animate {
+         width: 100%;
+         height: 10px;
+         background: rgba(255, 255, 255, 0.85);
+         border-bottom-right-radius: 0.375rem;
+         border-bottom-left-radius: 0.375rem;
+         overflow: hidden;
+      }
+
+      .time-animate div {
+         width: 100%;
+         height: 100%;
+         background: #d59393;
+         animation: timew 5s linear both;
+      }
+
+      @keyframes timew {
+         100% {
+            width: 0;
+         }
+      }
+
+      @keyframes timeend {
+         80% {
+            opacity: 1;
+         }
+
+         100% {
+            opacity: 0;
+         }
+      }
+
+      /* MESSAGES END */
+   </style>
+
+</head>
+
+<body>
+   {% if messages %}
+   <div class="tost">
+      {% for i in messages %}
+      <div class="toast align-items-center show tost position-relative mt-2" role="alert" aria-live="assertive"
+         aria-atomic="true">
+         <div class="d-flex">
+            <div class="toast-body {% if i.tags == 'warning' %}text-danger{% endif %} {% if i.tags == 'success' %}text-success{% endif %}">
+               {{ i }}
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="time-animate">
+            <div></div>
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+   {% endif %}
+   
+   {% include 'part/_header.html' %}
+   
+   {% block main %}
+   
+   {% endblock main %}
+   
+   {% include 'part/_footer.html' %}
+   
+   <!-- Start Script -->
+   <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+   <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+   <script src="{% static 'js/templatemo.js' %}"></script>
+   <script src="{% static 'js/custom.js' %}"></script>
+   <!-- MDB -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js"></script>
+   <!-- End Script -->
+
+   
+   {% block js %}
+      
+   {% endblock js %}
+      
+</body>
+
+</html>

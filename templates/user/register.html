@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block main %}
+<main>
+   <div class="row justify-content-center my-5">
+      <div class="col-4">
+         <h3>Kayıt Ol</h3>
+         <form method="POST">
+            {% csrf_token %}
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+               <input type="text" name="fname" id="form2Example1" class="form-control" />
+               <label class="form-label" for="form2Example1">Ad</label>
+            </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+               <input type="email" name="email" id="form2Example1" class="form-control" />
+               <label class="form-label" for="form2Example1">Email</label>
+            </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+               <input type="text" name="username" id="form2Example1" class="form-control" />
+               <label class="form-label" for="form2Example1">Kullanıcı Adı</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+               <input type="password" name="password1" id="form2Example2" class="form-control" />
+               <label class="form-label" for="form2Example2">Şifre</label>
+            </div>
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+               <input type="password" name="password2" id="form2Example2" class="form-control" />
+               <label class="form-label" for="form2Example2">Tekrar Şifre</label>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Kayıt Ol</button>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+               <p>Zaten bir hesabım var <a href="{% url 'loginUser' %}">Giriş</a></p>
+               <p>or sign up with:</p>
+               <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-facebook-f"></i>
+               </button>
+
+               <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-google"></i>
+               </button>
+
+               <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-twitter"></i>
+               </button>
+
+               <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-github"></i>
+               </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</main>
+{% endblock main %}
