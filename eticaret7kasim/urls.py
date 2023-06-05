@@ -27,7 +27,7 @@ urlpatterns = [
     path('about',aboutPage ,name='aboutPage'),
     path('contact',contactPage ,name='contactPage'),
     path('shop',shopPage ,name='shopPage'),
-    path('detail',detailPage ,name='detailPage'),
+    path('detail/<slug>/<color>',detailPage ,name='detailPage'),
     # === USER ===
     path('login', loginUser, name='loginUser'),
     path('logout', logoutUser, name='logoutUser'),
