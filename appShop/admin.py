@@ -1,9 +1,15 @@
 from django.contrib import admin
 from .models import *
 
+
+@admin.register(Shop)
+class ShopAdmin(admin.ModelAdmin):
+   list_display = ('user', 'product', 'id',  'piece', 'price')
+
+
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-   list_display = ( 'title','id', 'user', 'product','rating')
+   list_display = ('product', 'id', 'user', 'title', 'rating')
    search_fields = ('title','user','product')
   
 @admin.register(Product)

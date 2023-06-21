@@ -29,7 +29,8 @@ class Brand(models.Model):
 class Category(models.Model):
    title = models.CharField(("Kategori"), max_length=50)
    slug = models.SlugField(("slug"), blank=True)
-
+   
+   
    def save(self, *args, **kwargs):
       self.slug = slugify(self.title)
       super().save(*args, **kwargs)
@@ -102,4 +103,15 @@ class Comment(models.Model):
       return self.title
    
    
+class Shop(models.Model):
+   user = models.ForeignKey(User, verbose_name=("Kullanıcı"), on_delete=models.CASCADE)
+   product = models.ForeignKey(ProductDetail, verbose_name=("Ürün"), on_delete=models.CASCADE)
+   piece = models.IntegerField(("Adet"))
+   price = models.FloatField(("Toplam Fiyat"), null=True, blank=True)
+   
+   def __str__(self):
+      return self.user.username
 
+   def save(self, *args, **kwargs):
+      self.price = int(self.piece) * float(self.product.price)
+      super().save(*args, **kwargs)

@@ -26,8 +26,12 @@ urlpatterns = [
     path('',indexPage ,name='indexPage'),
     path('about',aboutPage ,name='aboutPage'),
     path('contact',contactPage ,name='contactPage'),
+    # === PRODUCT ===
     path('shop',shopPage ,name='shopPage'),
     path('detail/<slug>/<color>',detailPage ,name='detailPage'),
+    path('productAdd', productAddPage, name='productAddPage'),
+    path('shopbasket', shopBasketPage, name='shopBasketPage'),
+    path('shopBasketDelete/<id>', shopBasketDelete, name='shopBasketDelete'),
     # === USER ===
     path('login', loginUser, name='loginUser'),
     path('logout', logoutUser, name='logoutUser'),

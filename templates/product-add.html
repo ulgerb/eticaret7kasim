@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+   
+{% endblock css %}
+
+
+{% block main %}
+<section>
+   <div class="contain">
+      <div class="row justify-content-center m-0">
+         <div class="col-6 mt-4 p-3">
+            <form method="POST" enctype="multipart/form-data">
+               {% csrf_token %}
+               <div class="gap-2 d-flex flex-column p-3 rounded-4" style="box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;">
+                  <h3>Ürün Ekle</h3>
+                  <input class="form-control" name="title" type="text" placeholder="Başlık">
+                  <textarea class="form-control" name="text" placeholder="Açıklama" cols="30" rows="6"></textarea>
+                  <select name="category" required class="form-select">
+                     <option value="" disabled selected>Kategori Seçiniz</option>
+                     {% for i in categorys %}
+                     <option value="{{ i.id }}">{{ i.title }}</option>
+                     {% endfor %}
+                  </select>
+   
+                  <select name="brand" class="form-select">
+                     <option value="" disabled selected>Marka Seçiniz</option>
+                     {% for i in brands %}
+                     <option value="{{ i.id }}">{{ i.title }}</option>
+                     {% endfor %}
+                  </select>
+
+               </div>
+               <!-- renk add button -->
+               <div class="btn btn-success my-3 w-100" id="coloradd" onclick="colorAdd()">Renk ve Stok Ekle</div>
+               <!-- renk stok -->
+               <div id="productDiv">
+               </div>
+
+               <button class="btn btn-primary w-100" type="submit" name="submit" value="productAddForm">Ürün Oluştur</button>
+            </form>
+            <script>
+               let productDiv = document.getElementById("productDiv");
+               let coloradd = document.getElementById("coloradd");
+               let say = 0;
+               let colorsL = {{ colorsL|safe }};
+               console.log(colorsL);
+               /*for (i=0; i<10;i++){
+                  console.log(colorsL[i]);
+               }*/
+               
+               const colorAdd = ()=>{
+
+                  say++
+                  
+                  let productD = productDiv.appendChild(Object.assign(
+                     document.createElement("div"),
+                     { className:"mt-4 p-3 rounded-4", style: "box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;" }
+                  ))
+
+                  
+                  let titleh4 = productD.appendChild(Object.assign(
+                     document.createElement("h6"),
+                     { className:"mt-3",innerText: say+".Ürün Detayı" }
+                  ))
+                  
+                  let colorS=productD.appendChild(Object.assign(
+                     document.createElement("select"),
+                     {className:"form-select", name: "color" + say, required: true }
+                  ))
+                  
+                  for(i=0;i<Object.keys(colorsL).length; i++){
+                     colorS.appendChild(Object.assign(
+                        document.createElement("option"),
+                        {value:i+1, innerText: colorsL[i] }
+                     ))
+                  }
+
+                  let priceIn = productD.appendChild(Object.assign(
+                     document.createElement("input"),
+                     { type:'number', className: 'form-control mt-2', step:'0.01', name:'price'+say, placeholder:"Ürün Fiyatı" }
+                  ))
+                  let stokIn = productD.appendChild(Object.assign(
+                     document.createElement("input"),
+                     { type:'number', className: 'form-control mt-2', name:'stok'+say, placeholder:"Ürün Stok" }
+                  ))
+                  
+                  let imgBt = productD.appendChild(Object.assign(
+                     document.createElement("button"),
+                     { className: "btn btn-success my-3 w-100 imageadd"+say, type:"button", innerText:"Resim Ekle" }
+                  ))
+                  let imgDiv = productD.appendChild(Object.assign(
+                     document.createElement("div"),
+                     {className:"image"+say}
+                  ))
+                  let imgIn = productD.appendChild(Object.assign(
+                     document.createElement("input"),
+                     { type: 'file', className: 'form-control mt-2', name: 'img' + e.nextElementSibling.className + "_" + 1 }
+                  ))
+
+                  let imageadd = document.querySelectorAll(".imageadd"+say);
+                  say2 = 2
+                  imageadd.forEach((e, i) => {
+                     e.addEventListener("click", () => {
+                        console.log(productD.childNodes.length);
+                        e.nextElementSibling.appendChild(Object.assign(
+                           document.createElement("input"),
+                           { type: 'file', className: 'form-control mt-2', name: 'img' + e.nextElementSibling.className +"_"+ say2 }
+                        ))
+                        say2++;
+                     })
+                  })
+                  
+                  /*productD.innerHTML += 
+                  `<div class='gap-2 d-flex flex-column'>
+                     <h4>${say}.Ürün Detayı</h4> 
+                     <select name='color${say}' required class='form-select'>
+                        <option disabled>Renk Seçiniz</option>
+                        {% for i in colors %}
+                        <option value="{{ i.id }}">{{ i.title }}</option>
+                        {% endfor %}
+                     </select >
+                     <input type='number' class='form-control' step='0.01' name='' id=''>
+                     <input type='number' class='form-control' name='' id=''>
+                     <input type='file' name='image' id='' class='form-control'>
+                  </div>
+                  <hr>`*/
+                  
+               }
+               
+               
+
+                  
+
+            </script>
+         </div>
+      </div>
+   </div>
+</section>
+{% endblock main %}
+   

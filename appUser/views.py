@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 
+
 def loginUser(request):
    context = {}
    
@@ -20,6 +21,8 @@ def loginUser(request):
       return redirect('indexPage')
       
    return render( request, "user/login.html", context)
+
+
 
 def registerUser(request):
    context = {}
@@ -48,6 +51,7 @@ def registerUser(request):
          messages.warning(request, 'Şifreler aynı değil!')
          return redirect('registerUser')
    return render( request, "user/register.html", context)
+
 
 def logoutUser(request):
    logout(request)
